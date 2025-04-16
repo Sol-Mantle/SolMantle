@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sol & Mantle LLP</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #000;
+    }
+    header {
+      background-color: #0b3d2e;
+      color: white;
+      padding: 2em;
+      text-align: center;
+    }
+    header img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto 1em auto;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8em;
+    }
+    header p {
+      font-style: italic;
+      font-size: 1em;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2em;
+    }
+    .main-content, .sidebar {
+      flex: 1 1 100%;
+      padding: 1em;
+    }
+    .sidebar {
+      background: #f4f4f4;
+    }
+    @media (min-width: 768px) {
+      .main-content {
+        flex: 2;
+      }
+      .sidebar {
+        flex: 1;
+      }
+    }
+    section {
+      margin-bottom: 2em;
+    }
+    h2 {
+      border-bottom: 2px solid #0b3d2e;
+      padding-bottom: 0.3em;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.5em;
+      margin: 0.5em 0;
+      border: 1px solid #ccc;
+    }
+    form button {
+      background-color: #0b3d2e;
+      color: white;
+      padding: 0.6em 1.2em;
+      border: none;
+    }
+    ul.rss-feed {
+      list-style-type: none;
+      padding: 0;
+    }
+    ul.rss-feed li {
+      margin-bottom: 1em;
+    }
+  </style>
+</head>
+<body>
+  <header style="font-family: Georgia, serif; letter-spacing: 0.5px;">
+    <img src="logo.jpeg" alt="Sol & Mantle LLP Logo" style="max-width: 180px;">
+    <h1 style="font-size: 2.4em; margin-bottom: 0.3em;">Sol & Mantle LLP</h1>
+    <p style="font-style: italic; font-size: 1.2em; color: #d4af37;">Your Legal Launchpad – Ethical. Digital. Scalable.</p>
+  </header>
+  <div class="container">
+    <div class="main-content">
+      <section>
+        <h2>About Sol & Mantle</h2>
+        <p>Sol & Mantle LLP is a boutique legal startup built for a connected, evolving world. Rooted in timeless legal values and powered by technology, we deliver agile, client-centered legal services to individuals, startups, and growing enterprises—wherever they are.</p>
+      </section>
+      <section>
+        <h2>Founder: Adv. Lalchhanhima Chhangte</h2>
+        <p>Sol & Mantle LLP was founded with a vision to modernize legal practice without compromising its ethical foundation. Adv. Lalchhanhima Chhangte leads the firm with a focus on responsibility, strategic thinking, and trust. Under his leadership, Sol & Mantle has grown into a lean, impact-driven legal practice, serving clients across jurisdictions with integrity at its core.</p>
+      </section>
+      <section>
+        <h2>What We Offer</h2>
+        <ul>
+          <li>Strategic legal counsel for startups and founders</li>
+          <li>Contract drafting, compliance, and advisory services</li>
+          <li>Remote consultations and secure digital communication</li>
+          <li>A values-based approach to law, grounded in clarity and discretion</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Contact Us</h2>
+        <form action="https://formsubmit.co/chhangtechhanhima@gmail.com" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </section>
+    </div>
+    <div class="sidebar">
+      <h2>Latest in Tech, AI & Law</h2>
+      <ul class="rss-feed" id="rssFeed">Loading feed...</ul>
+    </div>
+  </div>
+  <script>
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.lawfaremedia.org/rss.xml')
+      .then(response => response.json())
+      .then(data => {
+        const items = data.items.slice(0, 5);
+        const rssFeed = document.getElementById('rssFeed');
+        rssFeed.innerHTML = items.map(item => `<li><a href="${item.link}" target="_blank">${item.title}</a></li>`).join('');
+      })
+      .catch(err => {
+        document.getElementById('rssFeed').innerText = 'Failed to load feed.';
+      });
+  </script>
+</body>
+</html>
